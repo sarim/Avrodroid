@@ -58,9 +58,9 @@ Now compile:
 TODO
 ==
 
-0. (Important) Make v8 with snapshot support
-0. (Important) Fix android build script to generate libraries*cc files. They are generated using some python based script. (Now i'm just coping them from normal make)
-0. (Easy) Need to add stlport and v8 as git submodule.
-0. (Massive) Implement all functions of a input method.
+0. `(Important) [ndk]` Make v8 with snapshot support
+0. `(Important) [ndk]` Fix android build script to generate libraries*cc files. They are generated using some python based script. (Now i'm just coping them from normal make)
+0. `(Easy) [git]` Need to add stlport and v8 as git submodule.
+0. `(Massive) [sdk]` Implement all functions of a input method.
 
 If you are a android + unix + c geek, maybe help with these ? ^_^
