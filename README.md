@@ -1,5 +1,14 @@
-Place this first
+Avrodroid
 ==
+AvroKeyboard for android.
+
+![image](http://cl.ly/SQN6/screenshot-avrodroid.png)
+
+Installation
+==
+This project is in very very early stage of development. So proceed with your own risk and dont ask for support. 
+###Place this first
+
 
 commit `fc98e10624aa0fc5da76b5818d2cbcffe883e939` 
 of `https://android.googlesource.com/platform/external/stlport`
@@ -14,16 +23,15 @@ of `https://android.googlesource.com/platform/external/v8`
 in -> `jni/external/v8/`
 
 
-Patch
-==
+###Patch
 
 	cd jni/external/v8/
 	patch -p1 < ../../../gittu.patch
 
 
 
-Compile
-==
+###Compile
+
 
 
 Optional:
@@ -40,5 +48,17 @@ Now compile:
 	ndk-build -j 4
 
 
-Now goto eclipse and do what you want to do ;)
+####Now goto eclipse and do what you want to do ;)
+
+
+--
+
+
+TODO
 ==
+
+0. (Important) Make v8 with snapshot support
+0. (Important) Fix android build script to generate libraries*cc files. They are generated using some python based script. (Now i'm just coping them from normal make)
+0. (Easy) Need to add stlport and v8 as git submodule.
+
+If you are a android + unix + c geek, maybe help with these ? ^_^
