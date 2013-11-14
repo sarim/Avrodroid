@@ -13,7 +13,7 @@ public class AvroHelper {
 		//Bcz if a older version of file exists, i need to detect that using timestamp and copy newer file.
 		
 		String filepath = Caller.getFilesDir().getAbsolutePath() + "/" + filename;
-		return new File(filepath).exists();
+		return !(new File(filepath).exists());
 	}
 
 	public static boolean copyJavascriptLib(PhoneticIM Caller, String fileName){
