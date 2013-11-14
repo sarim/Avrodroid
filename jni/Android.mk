@@ -13,4 +13,6 @@ LOCAL_LDLIBS := -llog
 include $(BUILD_SHARED_LIBRARY)
 ENABLE_V8_SNAPSHOT = false
 
+include $(MY_LOCAL_PATH)/Helper.mk
+
 include $(MY_LOCAL_PATH)/external/v8/Android.libv8.mk
