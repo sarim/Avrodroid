@@ -1,5 +1,5 @@
 diff --git a/Android.libv8.mk b/Android.libv8.mk
-index 25691a6..e679530 100644
+index 25691a6..88bc0c3 100644
 --- a/Android.libv8.mk
 +++ b/Android.libv8.mk
 @@ -4,7 +4,7 @@ LOCAL_PATH := $(call my-dir)
@@ -11,15 +11,6 @@ index 25691a6..e679530 100644
  
  ifeq ($(TARGET_ARCH),mips)
         LOCAL_MIPS_MODE=mips
-@@ -12,7 +12,7 @@ endif
- 
- # Set up the target identity
- LOCAL_MODULE := libv8
--LOCAL_MODULE_CLASS := STATIC_LIBRARIES
-+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
- intermediates := $(call local-intermediates-dir)
- 
- # Android.v8common.mk defines common V8_LOCAL_SRC_FILES
 @@ -27,6 +27,8 @@ V8_LOCAL_SRC_FILES += \
    src/platform-linux.cc \
    src/platform-posix.cc
@@ -29,26 +20,21 @@ index 25691a6..e679530 100644
  ifeq ($(TARGET_ARCH),x86)
  V8_LOCAL_SRC_FILES += src/atomicops_internals_x86_gcc.cc
  endif
-@@ -78,12 +80,12 @@ endif
- 
- # The -fvisibility=hidden option below prevents exporting of symbols from
- # libv8.a in libwebcore.so.  That reduces size of libwebcore.so by 500k.
-+#	-fvisibility=hidden 
- LOCAL_CFLAGS += \
- 	-Wno-endif-labels \
- 	-Wno-import \
- 	-Wno-format \
- 	-fno-exceptions \
--	-fvisibility=hidden \
- 	-DENABLE_DEBUGGER_SUPPORT \
- 	-DENABLE_LOGGING_AND_PROFILING \
- 	-DENABLE_VMSTATE_TRACKING \
-@@ -110,4 +112,4 @@ endif
- 
- LOCAL_C_INCLUDES += $(LOCAL_PATH)/src
- 
--include $(BUILD_STATIC_LIBRARY)
-+include $(BUILD_SHARED_LIBRARY)
+@@ -66,11 +68,9 @@ LOCAL_GENERATED_SOURCES += $(V8_GENERATED_LIBRARIES)
+ # Generate snapshot.cc
+ ifeq ($(ENABLE_V8_SNAPSHOT),true)
+ SNAP_GEN := $(intermediates)/snapshot.cc
+-MKSNAPSHOT := $(HOST_OUT_EXECUTABLES)/mksnapshot.$(TARGET_ARCH)
+-$(SNAP_GEN): PRIVATE_CUSTOM_TOOL = $(MKSNAPSHOT) --logfile $(intermediates)/v8.log $(SNAP_GEN)
+-$(SNAP_GEN): $(MKSNAPSHOT)
+-	$(transform-generated-source)
+-LOCAL_GENERATED_SOURCES += $(SNAP_GEN)
++$(SNAP_GEN):
++	@cp -fp $(LOCAL_PATH)/../../snapshot.cc $(intermediates)/snapshot.cc
++LOCAL_SRC_FILES += src/snapshot.cc
+ else
+ LOCAL_SRC_FILES += \
+   src/snapshot-empty.cc
 diff --git a/Android.v8common.mk b/Android.v8common.mk
 index 4c77a90..6a8ad9a 100644
 --- a/Android.v8common.mk

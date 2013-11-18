@@ -184,7 +184,6 @@ public class PhoneticIM extends InputMethodService implements OnKeyboardActionLi
 	public native String avroparse(String sk1); 
 	static {
 		System.loadLibrary("stlport_shared");
-		System.loadLibrary("v8");
         System.loadLibrary("avrov8");
     }
 }
